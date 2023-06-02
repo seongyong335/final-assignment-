@@ -10,10 +10,14 @@
 <div>
   <pre>
   create database genshinsetdb;
+  
   show databases;
+  
   grant all privileges on genshinsetdb.* to sahmyook@'%';
+  
   show grants for sahmyook@'%';</pre>
-  <pre>
+<br>
+ <pre>
   USE genshinsetdb;
 
 CREATE TABLE `CHARACTER` (
