@@ -8,6 +8,7 @@
 </div>
 <br>
 <div>
+	<h1>DB</h1>
   <pre>
   create database genshinsetdb;
   
