@@ -1,16 +1,12 @@
-package com.set.controller.user;
+package com.set.service.user;
 
-import com.set.model.spec.dao.SpecDAO;
 import com.set.model.user.dao.UserDAO;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -18,11 +14,9 @@ import java.util.Map;
 
 import static com.common.Template.getSqlSession;
 
-@WebServlet("/user/delete")
-public class UserDelete extends HttpServlet {
+@WebServlet("/user/update")
+public class UserUpdate extends HttpServlet {
     private UserDAO userDAO;
-
-    private SpecDAO specDAO;
 
 
     @Override
@@ -34,21 +28,28 @@ public class UserDelete extends HttpServlet {
         userInfo.put("userId", request.getParameter("userId"));
         userInfo.put("userPasswd", request.getParameter("userPasswd"));
 
-        SqlSession sqlSession = getSqlSession();
-        userDAO = sqlSession.getMapper(UserDAO.class);
-        specDAO = sqlSession.getMapper(SpecDAO.class);
+            if(request.getParameter("userPasswd") == ""){
+                writer.write("<script>alert('비밀번호를 입력해주세요.');history.go(-1)</script>");
+                writer.close();
+            }
+            SqlSession sqlSession = getSqlSession();
+            userDAO = sqlSession.getMapper(UserDAO.class);
 
-        int result = 0;
-        result = specDAO.deleteSpec(userInfo);
-        if (result > 0) {
-            sqlSession.commit();
+            int result = 0;
 
-            result = userDAO.deleteUser(userInfo);
+            try{
+                result = userDAO.updateUser(userInfo);
+            } catch (PersistenceException e) {
+                sqlSession.rollback();
+                sqlSession.close();
+                writer.write("<script>alert('비밀번호를 제대로 입력해주세요.');history.go(-1)</script>");
+                writer.close();
+            }
 
-            if (result > 0) {
+            if(result > 0){
                 sqlSession.commit();
                 sqlSession.close();
-                writer.write("<script>alert('그동안 고마웠어 여행자');location.href='/';</script>");
+                writer.write("<script>alert('수정완료!');location.href='/';</script>");
                 writer.close();
             } else {
                 sqlSession.rollback();
@@ -56,11 +57,5 @@ public class UserDelete extends HttpServlet {
                 writer.write("<script>alert('에러가 발생하였습니다. 다시 시도해주세요.');history.go(-1)</script>");
                 writer.close();
             }
-        } else {
-            sqlSession.rollback();
-            sqlSession.close();
-            writer.write("<script>alert('에러가 발생하였습니다. 다시 시도해주세요.');history.go(-1)</script>");
-            writer.close();
         }
     }
-}

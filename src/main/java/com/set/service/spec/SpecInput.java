@@ -1,4 +1,4 @@
-package com.set.controller.spec;
+package com.set.service.spec;
 
 import com.set.model.character.dto.CharacterDTO;
 import com.set.model.spec.dao.SpecDAO;

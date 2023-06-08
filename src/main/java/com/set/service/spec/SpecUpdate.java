@@ -1,8 +1,9 @@
-package com.set.controller.spec;
+package com.set.service.spec;
 
 import com.set.model.character.dto.CharacterDTO;
 import com.set.model.spec.dao.SpecDAO;
 import com.set.model.spec.dto.SpecDTO;
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 
 import javax.servlet.*;
@@ -94,7 +95,17 @@ public class SpecUpdate extends HttpServlet {
         specDTO.setSpecCr(Double.parseDouble(request.getParameter("specCr")));
         specDTO.setSpecCdmg(Double.parseDouble(request.getParameter("specCdmg")));
 
-        int result = specDAO.updateSpec(specDTO);
+        int result = 0;
+
+        try {
+            result = specDAO.updateSpec(specDTO);
+
+        } catch (PersistenceException e){
+
+            writer.write("<script>alert('값이 너무 큽니다.');history.go(-1);</script>");
+            writer.close();
+        }
+
         List<CharacterDTO> userCharacterList = specDAO.selectUserCharacterList(request.getParameter("userId"));
         request.setAttribute("userCharacterList", userCharacterList);
 

@@ -1,4 +1,4 @@
-package com.set.controller.character;
+package com.set.service.character;
 
 import com.set.model.character.dao.CharacterDAO;
 import com.set.model.character.dto.CharacterDTO;
