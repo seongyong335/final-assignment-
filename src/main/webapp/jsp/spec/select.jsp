@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>GENSHIN-SET</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -126,7 +126,8 @@
             <option value="방어력(%)"/>
             <option value="체력(%)"/>
             <option value="원소 마스터리"/>
-            <option value="원소 피해(%)"/>
+            <option value="원소피해(%)"/>
+            <option value="물리피해(%)"/>
         </datalist>
         <datalist id="ArtifactCirclet">
             <option value="공격력(%)"/>
@@ -135,6 +136,7 @@
             <option value="원소 마스터리"/>
             <option value="치명타 확률(%)"/>
             <option value="치명타 피해량(%)"/>
+            <option value="치유 보너스"/>
         </datalist>
         <div class="character-info">
             <img src="/pic/character/${charInfo[0].charName}.png"/>
@@ -179,7 +181,7 @@
             <label>기타</label>
             <input type="text" name="specEtc" value="${spec[0].specEtc}"><br>
             <label>기타2</label>
-            <input type="text" name="specEtc2"><br>
+            <input type="text" name="specEtc2" value="${spec[0].specEtc2}"><br>
         </div>
         <div>
             <input type="hidden" name="userId" value="${spec[0].userId}">

@@ -11,4 +11,8 @@ public interface UserDAO {
 
 
     List<UserDTO> selectUser(Map<String, String> userInfo);
+
+    int updateUser(Map<String, String> userInfo);
+
+    int deleteUser(Map<String, String> userInfo);
 }

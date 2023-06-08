@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>GENSHIN-SET</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -74,6 +74,14 @@
             border-radius: 4px;
             cursor: pointer;
         }
+        .userInfo-button {
+            padding: 5px 10px;
+            background-color: #cccccc;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="container">
@@ -85,8 +93,9 @@
             <input type="hidden" name="userId" value="<%=userId%>">
             <h3>사용자 : <%= userId %></h3>
             <button type="submit" class="addCharacter-button">캐릭터 추가</button>
-            <button type="button" class="logout-button" onclick="location.href='/jsp/login/login.jsp'" >로그아웃</button>
         </form>
+            <button type="button" class="userInfo-button" onclick="location.href='/jsp/user/info.jsp?userId=<%=userId%>'" >회원정보</button>
+            <button type="button" class="logout-button" onclick="location.href='/'" >로그아웃</button>
     </div>
     <div class="character-list">
         <c:forEach var="character" items="${ requestScope.userCharacterList }" varStatus="st">

@@ -5,7 +5,7 @@
     <title>GENSHIN-SET</title>
 </head>
 <body>
-    <jsp:forward page="/jsp/login/login.jsp"/>
+    <jsp:forward page="/jsp/user/login.jsp"/>
 패
 </body>
 </html>

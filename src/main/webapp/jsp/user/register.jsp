@@ -73,8 +73,8 @@
 </head>
 <body>
 <div class="container">
-    <h1>GENSHIN-SET</h1>
-    <form action="/jsp/login/user/login" method="post">
+    <h1>Register</h1>
+    <form action="/user/register" method="post">
         <label>ID:</label>
         <input type="text" name="userId">
         <br>
@@ -82,8 +82,8 @@
         <input type="password" name="userPasswd">
         <br>
         <div class="button-group">
-            <button type="button" onclick="location.href='/jsp/login/register.jsp'">Register</button>
-            <button type="submit">Log-In</button>
+            <button type="button" onclick="history.back()">뒤로가기</button>
+            <button type="submit" onclick="history.back()">회원가입</button>
         </div>
     </form>
 </div>
