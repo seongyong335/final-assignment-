@@ -76,4 +76,10 @@
                SPEC_ER = #{specEr}, SPEC_CR = #{specCr}, SPEC_CDMG = #{specCdmg}, SPEC_ETC = #{specEtc}, SPEC_ETC_2 = #{specEtc2}
          WHERE USER_ID = #{userId} AND CHAR_NO = #{charNo}
     </update>
+
+    <delete id="deleteSpec" parameterType="hashmap">
+        DELETE
+          FROM SPEC
+         WHERE USER_ID = #{userId}
+    </delete>
 </mapper>

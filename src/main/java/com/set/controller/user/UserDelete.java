@@ -1,5 +1,6 @@
 package com.set.controller.user;
 
+import com.set.model.spec.dao.SpecDAO;
 import com.set.model.user.dao.UserDAO;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
@@ -21,6 +22,8 @@ import static com.common.Template.getSqlSession;
 public class UserDelete extends HttpServlet {
     private UserDAO userDAO;
 
+    private SpecDAO specDAO;
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,14 +34,18 @@ public class UserDelete extends HttpServlet {
         userInfo.put("userId", request.getParameter("userId"));
         userInfo.put("userPasswd", request.getParameter("userPasswd"));
 
-            SqlSession sqlSession = getSqlSession();
-            userDAO = sqlSession.getMapper(UserDAO.class);
+        SqlSession sqlSession = getSqlSession();
+        userDAO = sqlSession.getMapper(UserDAO.class);
+        specDAO = sqlSession.getMapper(SpecDAO.class);
 
-            int result = 0;
+        int result = 0;
+        result = specDAO.deleteSpec(userInfo);
+        if (result > 0) {
+            sqlSession.commit();
 
-        result = userDAO.deleteUser(userInfo);
+            result = userDAO.deleteUser(userInfo);
 
-            if(result > 0){
+            if (result > 0) {
                 sqlSession.commit();
                 sqlSession.close();
                 writer.write("<script>alert('그동안 고마웠어 여행자');location.href='/';</script>");
@@ -49,5 +56,11 @@ public class UserDelete extends HttpServlet {
                 writer.write("<script>alert('에러가 발생하였습니다. 다시 시도해주세요.');history.go(-1)</script>");
                 writer.close();
             }
+        } else {
+            sqlSession.rollback();
+            sqlSession.close();
+            writer.write("<script>alert('에러가 발생하였습니다. 다시 시도해주세요.');history.go(-1)</script>");
+            writer.close();
         }
     }
+}

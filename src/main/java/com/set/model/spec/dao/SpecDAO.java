@@ -4,6 +4,7 @@ import com.set.model.character.dto.CharacterDTO;
 import com.set.model.spec.dto.SpecDTO;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SpecDAO {
 
@@ -16,4 +17,6 @@ public interface SpecDAO {
     List<CharacterDTO> selectUserCharacter(SpecDTO specDTO);
 
     int updateSpec(SpecDTO specDTO);
+
+    int deleteSpec(Map<String, String> userInfo);
 }
