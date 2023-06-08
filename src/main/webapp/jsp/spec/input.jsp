@@ -3,6 +3,111 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            width: 400px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+            height: fit-content;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="button"] {
+            background-color: #f44336;
+            margin-left: 10px;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 105px;
+        }
+
+        .highlight-red {
+            outline: 2px solid red;
+        }
+
+        .highlight-green {
+            outline: 2px solid green;
+        }
+
+        .character-info {
+            display: inline;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .character-info img {
+            height: 140px;
+            width: 140px;
+        }
+
+        .character-info .star {
+            height: 32px;
+            width: 32px;
+        }
+
+        .character-info .element {
+            height: 32px;
+            width: 32px;
+        }
+
+        #specStatus {
+            margin-bottom: 20px;
+        }
+
+        #specArtifacts {
+            margin-bottom: 20px;
+        }
+
+        #exSpecStatus {
+            margin-bottom: 20px;
+        }
+
+        #exSpecArtifacts {
+            margin-bottom: 20px;
+        }
+
+        #exSpecDiv {
+            background-color: #fff;
+            padding: 20px;
+            width: 400px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+    </style>
 </head>
 <body>
     <%
@@ -35,12 +140,12 @@
             <option value="치명타 확률(%)"/>
             <option value="치명타 피해량(%)"/>
         </datalist>
-        <div style="width:140px; float: left">
-            <img height="140px" width="140px" src="/pic/character/<%= charName %>.png"/>
-            <img height="32px" width="32px" src="/pic/star/star-<%= charStar %>.png"/>
-            <img height="32px" width="32px" src="/pic/element/Element_<%= charElement %>.png" style="float: right;"/>
+        <div class="character-info">
+            <img src="/pic/character/<%= charName %>.png"/>
+            <img class="star" src="/pic/star/star-<%= charStar %>.png"/>
+            <img class="element" src="/pic/element/Element_<%= charElement %>.png"/>
         </div>
-        <div id="specStatus" style="width:300px; float: left;">
+        <div id="specStatus">
             <label>체력</label><input type="text" name="specHp"><br>
             <label>방어력</label><input type="text" name="specDef"><br>
             <label>공격력</label><input type="text" name="specAfk"><br>
@@ -52,7 +157,7 @@
             <label>원소스킬</label><input type="number" name="specSk2" min="1" max="13"><br>
             <label>원소폭발</label><input type="number" name="specSk3" min="1" max="13"><br>
         </div>
-        <div id="specArtifacts" style="width:300px; float: left;">
+        <div id="specArtifacts">
             <label>무기</label><input type="text" name="specWeapon"><br>
             <label>성유물-꽃</label><input type="text" name="specArtifactFlower" value="체력" readonly><br>
             <label>성유물-깃털</label><input type="text" name="specArtifactPlume" value="공격력" readonly><br>
@@ -65,9 +170,9 @@
         <div>
             <input type="hidden" name="userId" value="<%=userId%>">
             <input type="hidden" name="charNo" value="<%=charNo%>">
-            <button type="submit">Add</button>
-            <button type="reset">Reset</button>
             <button type="button" onclick="history.back()">Exit</button>
+            <button type="reset">Reset</button>
+            <button type="submit">Add</button>
         </div>
     </form>
 
