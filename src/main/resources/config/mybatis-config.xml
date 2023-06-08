@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+    <properties resource="config/connection-info.properties"/>
+    <typeAliases>
+        <typeAlias type="com.set.model.user.dto.UserDTO" alias="userDTO"/>
+        <typeAlias type="com.set.model.character.dto.CharacterDTO" alias="characterDTO"/>
+        <typeAlias type="com.set.model.spec.dto.SpecDTO" alias="specDTO"/>
+        <typeAlias type="com.set.model.spec.dto.ExSpecDTO" alias="exSpecDTO"/>
+    </typeAliases>
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}" />
+                <property name="url" value="${url}" />
+                <property name="username" value="${username}" />
+                <property name="password" value="${password}" />
+            </dataSource>
+        </environment>
+    </environments>
+     <mappers>
+        <package name="com.set.model.user.dao"/>
+         <package name="com.set.model.character.dao"/>
+         <package name="com.set.model.spec.dao"/>
+    </mappers>
+</configuration>

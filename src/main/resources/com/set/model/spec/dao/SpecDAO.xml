@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.set.model.spec.dao.SpecDAO">
+    <resultMap id="specResultMap" type="specDTO">
+        <id property="charNo" column="CHAR_NO"/>
+        <id property="userId" column="USER_ID"/>
+        <result property="specSk1" column="SPEC_SK_1"/>
+        <result property="specSk2" column="SPEC_SK_2"/>
+        <result property="specSk3" column="SPEC_SK_3"/>
+        <result property="specWeapon" column="SPEC_WEAPON"/>
+        <result property="specArtifactFlower" column="SPEC_ARTIFACT_FLOWER"/>
+        <result property="specArtifactPlume" column="SPEC_ARTIFACT_PLUME"/>
+        <result property="specArtifactSands" column="SPEC_ARTIFACT_SANDS"/>
+        <result property="specArtifactGoblet" column="SPEC_ARTIFACT_GOBLET"/>
+        <result property="specArtifactCirclet" column="SPEC_ARTIFACT_CIRCLET"/>
+        <result property="specHp" column="SPEC_HP"/>
+        <result property="specDef" column="SPEC_DEF"/>
+        <result property="specAfk" column="SPEC_AFK"/>
+        <result property="specEm" column="SPEC_EM"/>
+        <result property="specEr" column="SPEC_ER"/>
+        <result property="specCr" column="SPEC_CR"/>
+        <result property="specCdmg" column="SPEC_CDMG"/>
+        <result property="specEtc" column="SPEC_ETC"/>
+        <result property="specEtc2" column="SPEC_ETC_2"/>
+    </resultMap>
+    <resultMap id="characterResultMap" type="characterDTO">
+        <id property="charNo" column="CHAR_NO"/>
+        <result property="charName" column="CHAR_NAME"/>
+        <result property="charElement" column="CHAR_ELEMENT"/>
+        <result property="charStar" column="CHAR_STAR"/>
+    </resultMap>
+
+    <insert id="inputSpec" parameterType="specDTO">
+        INSERT INTO SPEC (USER_ID, CHAR_NO,
+        SPEC_SK_1, SPEC_SK_2, SPEC_SK_3, SPEC_WEAPON,
+        SPEC_ARTIFACT_FLOWER, SPEC_ARTIFACT_PLUME, SPEC_ARTIFACT_SANDS, SPEC_ARTIFACT_GOBLET, SPEC_ARTIFACT_CIRCLET,
+        SPEC_HP, SPEC_DEF, SPEC_AFK, SPEC_EM, SPEC_ER, SPEC_CR, SPEC_CDMG, SPEC_ETC, SPEC_ETC_2)
+        VALUES (#{userId}, #{charNo},
+                #{specSk1}, #{specSk2}, #{specSk3}, #{specWeapon}
+                   , #{specArtifactFlower}, #{specArtifactPlume}, #{specArtifactSands}, #{specArtifactGoblet}, #{specArtifactCirclet}
+               , #{specHp}, #{specDef}, #{specAfk}, #{specEm}, #{specEr}, #{specCr}, #{specCdmg}, #{specEtc}, #{specEtc2})
+    </insert>
+
+    <select id="selectUserCharacterList" parameterType="String" resultMap="characterResultMap">
+        SELECT B.CHAR_NO, B.CHAR_NAME, B.CHAR_STAR, B.CHAR_ELEMENT
+          FROM SPEC A
+              JOIN genshinsetdb.CHARACTER B
+          ON A.CHAR_NO = B.CHAR_NO
+         WHERE A.USER_ID = #{userId}
+    </select>
+
+    <select id="selectUserCharacter" parameterType="specDTO" resultMap="characterResultMap">
+        SELECT B.CHAR_NO, B.CHAR_NAME, B.CHAR_STAR, B.CHAR_ELEMENT
+        FROM SPEC A
+                 JOIN genshinsetdb.CHARACTER B
+                      ON A.CHAR_NO = B.CHAR_NO
+        WHERE A.USER_ID = #{userId} AND A.CHAR_NO = #{charNo}
+    </select>
+
+    <select id="selectSpec" parameterType="specDTO" resultMap="specResultMap">
+        SELECT USER_ID, CHAR_NO,
+                  SPEC_SK_1, SPEC_SK_2, SPEC_SK_3, SPEC_WEAPON,
+                  SPEC_ARTIFACT_FLOWER, SPEC_ARTIFACT_PLUME, SPEC_ARTIFACT_SANDS, SPEC_ARTIFACT_GOBLET, SPEC_ARTIFACT_CIRCLET,
+                  SPEC_HP, SPEC_DEF, SPEC_AFK, SPEC_EM, SPEC_ER, SPEC_CR, SPEC_CDMG, SPEC_ETC, SPEC_ETC_2
+          FROM SPEC
+         WHERE USER_ID = #{userId} AND CHAR_NO = #{charNo}
+    </select>
+
+    <update id="updateSpec" parameterType="specDTO">
+        UPDATE SPEC
+           SET USER_ID = #{userId}, CHAR_NO = #{charNo},
+               SPEC_SK_1 = #{specSk1}, SPEC_SK_2 = #{specSk2}, SPEC_SK_3 = #{specSk3}, SPEC_WEAPON = #{specWeapon},
+                SPEC_ARTIFACT_FLOWER = #{specArtifactFlower}, SPEC_ARTIFACT_PLUME = #{specArtifactPlume},
+               SPEC_ARTIFACT_SANDS = #{specArtifactSands}, SPEC_ARTIFACT_GOBLET = #{specArtifactGoblet}, SPEC_ARTIFACT_CIRCLET = #{specArtifactCirclet},
+                SPEC_HP = #{specHp}, SPEC_DEF = #{specDef}, SPEC_AFK = #{specAfk}, SPEC_EM = #{specEm},
+               SPEC_ER = #{specEr}, SPEC_CR = #{specCr}, SPEC_CDMG = #{specCdmg}, SPEC_ETC = #{specEtc}, SPEC_ETC_2 = #{specEtc2}
+         WHERE USER_ID = #{userId} AND CHAR_NO = #{charNo}
+    </update>
+</mapper>

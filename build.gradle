@@ -30,6 +30,9 @@ dependencies {
     implementation 'org.mybatis:mybatis:3.5.6'
     // https://mvnrepository.com/artifact/servlets.com/cos
     implementation 'servlets.com:cos:05Nov2002'
+    implementation 'mysql:mysql-connector-java:8.0.28'
+    // https://mvnrepository.com/artifact/javax.servlet/jstl
+    implementation 'javax.servlet:jstl:1.2'
 }
 
 test {
