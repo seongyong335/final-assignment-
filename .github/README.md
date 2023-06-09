@@ -20,19 +20,17 @@
   8. 메인화면의 회원 정보를 눌러 회원의 정보 수정이 가능합니다.
   9. 바꿀 비밀번호를 입력하고 회원 수정을 누르면 비밀번호가 변경이 됩니다.
   10. 회원 탈퇴를 누르면 회원 정보가 삭제 됩니다.</pre>
-
-	
-	<h3>스펙 예시가 존재하는 캐릭터 목록</h3>
-	
+</div>
+	<div>
+		<h3>스펙 예시가 존재하는 캐릭터 목록</h3>
+	<img width="623" alt="스크린샷 2023-06-09 07 03 42" src="https://github.com/seongyong335/final-assignment-master/assets/127364188/4e613bf2-5646-4285-aeae-de5b766012dd">
 	<h3>스펙 입력 예시</h3>
 <img width="396" alt="스크린샷 2023-06-09 10 49 34" src="https://github.com/seongyong335/final-assignment-master/assets/127364188/bf25a55f-669c-4396-b22d-bc0291c69f8e">
 	<h3>스펙 입력 후 확인 화면</h3>
 <img width="837" alt="스크린샷 2023-06-09 10 49 55" src="https://github.com/seongyong335/final-assignment-master/assets/127364188/b13ede6b-206c-4a27-8135-6ad24381f7ab">
 	<h3>부족한 스펙 표시 화면</h3>
 <img width="837" alt="스크린샷 2023-06-09 10 50 13" src="https://github.com/seongyong335/final-assignment-master/assets/127364188/8e26268a-7bec-446e-bd8b-10d6191018f6">
-
-	
-</div>
+	</div>
 <br>
 <div>
 	<h1>DB</h1>
