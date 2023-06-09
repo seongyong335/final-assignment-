@@ -36,24 +36,21 @@ public class UserDelete extends HttpServlet {
         userDAO = sqlSession.getMapper(UserDAO.class);
         specDAO = sqlSession.getMapper(SpecDAO.class);
 
+        int result_s = 0;
         int result = 0;
-        result = specDAO.deleteSpec(userInfo);
+        result_s = specDAO.deleteSpec(userInfo);
+        if (result_s > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+        result = userDAO.deleteUser(userInfo);
+
         if (result > 0) {
             sqlSession.commit();
-
-            result = userDAO.deleteUser(userInfo);
-
-            if (result > 0) {
-                sqlSession.commit();
-                sqlSession.close();
-                writer.write("<script>alert('그동안 고마웠어 여행자');location.href='/';</script>");
-                writer.close();
-            } else {
-                sqlSession.rollback();
-                sqlSession.close();
-                writer.write("<script>alert('에러가 발생하였습니다. 다시 시도해주세요.');history.go(-1)</script>");
-                writer.close();
-            }
+            sqlSession.close();
+            writer.write("<script>alert('그동안 고마웠어 여행자');location.href='/';</script>");
+            writer.close();
         } else {
             sqlSession.rollback();
             sqlSession.close();
